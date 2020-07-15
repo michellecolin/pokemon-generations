@@ -6,13 +6,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { DeckListComponent } from './deck-list/deck-list.component';
 import { DeckComponent } from './deck/deck.component';
 import { PokemonComponent } from './pokemon/pokemon.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DeckListComponent,
     DeckComponent,
-    PokemonComponent
+    PokemonComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
