@@ -10,6 +10,7 @@ import { Subject } from 'rxjs';
 export class PokeService {
   public decks;
   public decksLoaded = new Subject<any>();
+  public deckLoaded = new Subject<any>();
 
   constructor(
     private httpClient: HttpClient,
@@ -45,7 +46,7 @@ export class PokeService {
     const promises = [];
 
     decks.forEach(deck => {
-      promises.push(this.getDeck(deck.name).toPromise());
+      promises.push(this.getDeckRequest(deck.name).toPromise());
     });
 
     return promises;
@@ -55,7 +56,30 @@ export class PokeService {
    * Get deck full information
    * @param name deck name identifier
    */
-  getDeck(name) {
+  getDeckRequest(name) {
     return this.httpClient.get<any>(`${environment.endpoint}generation/${name}`);
+  }
+
+  getDeck(name) {
+    console.log(name);
+    if (this.decks) {
+      this.deckLoaded.next(this.decks.find(deck => deck.name === name));
+    } else {
+     this.getDeckRequest(name).subscribe(response => {
+      this.deckLoaded.next(response);
+     });
+    }
+  }
+
+  getDeckName(deck) {
+    return deck.names[Object.keys(deck.names).find(name => {
+      return deck.names[name].language.name === 'en';
+    })].name;
+  }
+
+  getDeckNumber(deck) {
+    return deck.names[Object.keys(deck.names).find(name => {
+      return deck.names[name].language.name === 'en';
+    })].name.split(' ')[1];
   }
 }

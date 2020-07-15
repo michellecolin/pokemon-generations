@@ -1,18 +1,24 @@
 <div class="container">
   <div class="row mt-5">
-    <div class="col-12 col-md-3 mb-4" *ngFor="let deck of decks">
+    <div class="col-12 col-md-3 mb-5" *ngFor="let deck of decks">
       <div class="card text-center">
-        <div class="card-img"></div>
+        <div class="card-header">
+          <span>Generation</span>
+          <h5 class="card-title">
+            {{getDeckNumber(deck)}}
+          </h5>
+        </div>
+        
         <div class="card-body">
-          <h5 class="card-title">{{getDeckName(deck)}}</h5>
-
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Species: {{deck.pokemon_species.length}}</li>
-            <li class="list-group-item">Moves: {{deck.moves.length}}</li>
-            <li class="list-group-item">Abilities: {{deck.abilities.length}}</li>
+            <li class="list-group-item"><i class="fas fa-dragon"></i> Species: <strong>{{deck.pokemon_species.length}}</strong></li>
+            <li class="list-group-item"><i class="fas fa-fire-alt"></i> Moves: <strong>{{deck.moves.length}}</strong></li>
+            <li class="list-group-item"><i class="fas fa-star"></i> Abilities: <strong>{{deck.abilities.length}}</strong></li>
           </ul>
 
-          <a href="#" class="btn btn-warning">See Details</a>
+          <div class="mt-4">
+            <a href="#" routerLink="/deck/{{deck.name}}">See Details<i class="ml-2 fas fa-long-arrow-alt-right"></i></a>
+          </div>
         </div>
       </div>
     </div>

@@ -26,10 +26,8 @@ export class DeckListComponent implements OnInit, OnDestroy {
     this.pokeApi.getDecksGenerations();
   }
 
-  getDeckName(deck) {
-    return deck.names[Object.keys(deck.names).find(name => {
-      return deck.names[name].language.name === 'en';
-    })].name;
+  getDeckNumber(deck) {
+    return this.pokeApi.getDeckNumber(deck);
   }
 
   ngOnDestroy(): void {
