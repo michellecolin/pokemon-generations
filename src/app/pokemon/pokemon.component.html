@@ -60,7 +60,7 @@
       </div>
     </div>
 
-    <div class="col-12 mt-5">
+    <div class="col-12 mt-5" *ngIf="evolutionChain && evolutionChain.length > 0">
       <h4>Pokemon Evolution Chain</h4>
       <div class="row mt-4">
         <div class="col-12 d-flex col-md-4" [ngClass]="{'flex-column': innerWidth <= 500, 'mb-4': innerWidth > 500}" *ngFor="let specie of evolutionChain; let idx = index;">

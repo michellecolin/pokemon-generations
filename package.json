@@ -21,6 +21,7 @@
     "@angular/router": "^9.1.12",
     "bootstrap": "^4.5.0",
     "core-js": "^2.5.4",
+    "ngx-pagination": "^5.0.0",
     "ngx-spinner": "^9.0.2",
     "ngx-toastr": "^13.0.0",
     "rxjs": "~6.6.0",

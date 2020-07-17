@@ -12,6 +12,8 @@ export class DeckComponent implements OnInit {
   public loading;
   public deck;
   public innerWidth;
+  public perPage = 16;
+  public currentPage;
 
   constructor(
     private pokeApi: PokeService,
@@ -51,6 +53,10 @@ export class DeckComponent implements OnInit {
 
   getImageUrl(specie) {
     return this.pokeApi.getImageUrl(specie);
+  }
+
+  pageChanged($event) {
+    this.currentPage = $event;
   }
 
   @HostListener('window:resize', ['$event'])
