@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { PokeService } from '../services/pokeapi.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -10,11 +10,14 @@ import { ActivatedRoute } from '@angular/router';
 export class DeckComponent implements OnInit {
   public loading;
   public deck;
+  public innerWidth;
 
   constructor(
     private pokeApi: PokeService,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    this.innerWidth = window.innerWidth;
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -36,5 +39,19 @@ export class DeckComponent implements OnInit {
 
   getDeckName() {
     this.deck.translate_name = this.pokeApi.getDeckName(this.deck);
+  }
+
+  getDeckNumber(deck) {
+    return this.pokeApi.getDeckNumber(deck);
+  }
+
+  getImageUrl(url) {
+    const parts = url.split('/');
+    return `https://pokeres.bastionbot.org/images/pokemon/${parts[parts.length - 2]}.png`;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.innerWidth = window.innerWidth;
   }
 }

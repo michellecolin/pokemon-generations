@@ -1,7 +1,40 @@
 <div class="container">
   <div class="row">
-    <div class="col-12">
-      <h1>{{deck?.translate_name}}</h1>
+    <div class="col-12 mt-5">
+      <div class="card" [ngClass]="{'horizontal': innerWidth > 500}">
+        <div class="card-header">
+          <span class="card-header-subtitle">Generation</span>
+          <h5 class="card-header-title">
+            {{getDeckNumber(deck)}}
+          </h5>
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><i class="fas fa-dragon"></i> Species: <strong>{{deck.pokemon_species.length}}</strong></li>
+            <li class="list-group-item"><i class="fas fa-fire-alt"></i> Moves: <strong>{{deck.moves.length}}</strong></li>
+            <li class="list-group-item"><i class="fas fa-star"></i> Abilities: <strong>{{deck.abilities.length}}</strong></li>
+            <li class="list-group-item"><i class="fas fa-location-arrow"></i> Main Region: <strong class="text-capitalize">{{deck.main_region.name}}</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 mt-5">
+      <h4>Pokemon Species ({{deck.pokemon_species.length}})</h4>
+      <div class="row mt-4">
+        <div class="col-12 col-md-4 col-lg-3 mb-5" *ngFor="let specie of deck.pokemon_species">
+          <div class="card pokemon">
+            <div class="card-header">
+              <div class="card-img">
+                <img [src]="getImageUrl(specie.url)"/>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{specie.name}}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
