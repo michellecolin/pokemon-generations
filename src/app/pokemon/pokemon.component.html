@@ -44,7 +44,7 @@
     <div class="col-12 mt-5">
       <h4>Pokemon Evolution Chain</h4>
       <div class="row mt-4">
-        <div class="col-12 col-md-4 col-lg-3 mb-4" *ngFor="let specie of evolutionChain">
+        <div class="col-12 d-flex col-md-4" [ngClass]="{'flex-column': innerWidth <= 500, 'mb-4': innerWidth > 500}" *ngFor="let specie of evolutionChain; let idx = index;">
           <div class="card pokemon" routerLink="/pokemon/{{specie.name}}">
             <div class="card-header">
               <div class="card-img">
@@ -54,6 +54,10 @@
             <div class="card-body">
               <h5 class="card-title m-0"><span class="small-text">N° {{specie.id}}</span> - {{specie.name}}</h5>
             </div>
+          </div>
+          <div class="arrow" [ngStyle]="{'opacity': idx !== evolutionChain.length - 1 ? 1 : 0}">
+            <i *ngIf="innerWidth > 500" class="fas fa-chevron-right"></i>
+            <i *ngIf="innerWidth <= 500" class="fas fa-chevron-down"></i>
           </div>
         </div>
       </div>

@@ -27,10 +27,9 @@ export class PokemonComponent implements OnInit {
       if (params.id) {
         this.pokeApi.getPokemon(params.id).subscribe(response => {
           this.pokemon = response;
-          console.log(response);
+          this.evolutionChain = [];
 
           this.pokeApi.getEvolutionChain(this.pokemon.evolution_chain.url).subscribe(response => {
-            console.log(response);
             this.treatChain(response.chain);
           });
         });
@@ -68,8 +67,6 @@ export class PokemonComponent implements OnInit {
         });
       }
     });
-
-    console.log('FIM lalalala', this.evolutionChain);
   }
 
   @HostListener('window:resize', ['$event'])

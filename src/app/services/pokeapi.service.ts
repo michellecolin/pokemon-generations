@@ -69,7 +69,6 @@ export class PokeService {
   }
 
   getDeck(name) {
-    console.log(name);
     if (this.decks) {
       this.deckLoaded.next(this.decks.find(deck => deck.name === name));
     } else {

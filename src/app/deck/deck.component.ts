@@ -26,7 +26,6 @@ export class DeckComponent implements OnInit {
         const subsc = this.pokeApi.deckLoaded.subscribe(deck => {
           this.deck = deck;
           this.getDeckName();
-          console.log(this.deck);
           subsc.unsubscribe();
         });
 

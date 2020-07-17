@@ -18,7 +18,6 @@ export class DeckListComponent implements OnInit, OnDestroy {
     this.loading = true;
 
     this.subsDecksLoaded = this.pokeApi.decksLoaded.subscribe(response => {
-      console.log(response);
       this.decks = response;
       this.loading = false;
     });
