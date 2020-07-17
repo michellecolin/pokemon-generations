@@ -156,6 +156,13 @@ h4 {
   }
 }
 
+.breadcrumb {
+  background-color: #e6e6e6;
+  a {
+    color: #d81205;
+  }
+}
+
 @media (max-width: 500px) {
   .arrow {
     display: block;

@@ -1,7 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { PokeService } from '../services/pokeapi.service';
 import { ActivatedRoute } from '@angular/router';
-import { Chain } from '@angular/compiler';
 
 @Component({
   selector: 'app-pokemon',
@@ -27,6 +26,7 @@ export class PokemonComponent implements OnInit {
       if (params.id) {
         this.pokeApi.getPokemon(params.id).subscribe(response => {
           this.pokemon = response;
+          console.log(response);
           this.evolutionChain = [];
 
           this.pokeApi.getEvolutionChain(this.pokemon.evolution_chain.url).subscribe(response => {

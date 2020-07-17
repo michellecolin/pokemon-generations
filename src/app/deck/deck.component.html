@@ -1,28 +1,35 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/">home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{deck?.name.replace('-', ' ')}}</li>
+  </ol>
+</nav>
+
 <div class="container">
   <div class="row">
     <div class="col-12 mt-5">
       <div class="card" [ngClass]="{'horizontal': innerWidth > 500}">
         <div class="card-header">
           <span class="card-header-subtitle">Generation</span>
-          <h5 class="card-header-title">
+          <h5 class="card-header-title" *ngIf="deck">
             {{getDeckNumber(deck)}}
           </h5>
         </div>
         <div class="card-body">
           <ul class="list-group list-group-flush">
-            <li class="list-group-item"><i class="fas fa-dragon"></i> Species: <strong>{{deck.pokemon_species.length}}</strong></li>
-            <li class="list-group-item"><i class="fas fa-fire-alt"></i> Moves: <strong>{{deck.moves.length}}</strong></li>
-            <li class="list-group-item"><i class="fas fa-star"></i> Abilities: <strong>{{deck.abilities.length}}</strong></li>
-            <li class="list-group-item"><i class="fas fa-location-arrow"></i> Main Region: <strong class="text-capitalize">{{deck.main_region.name}}</strong></li>
+            <li class="list-group-item"><i class="fas fa-dragon"></i> Species: <strong>{{deck?.pokemon_species.length}}</strong></li>
+            <li class="list-group-item"><i class="fas fa-fire-alt"></i> Moves: <strong>{{deck?.moves.length}}</strong></li>
+            <li class="list-group-item"><i class="fas fa-star"></i> Abilities: <strong>{{deck?.abilities.length}}</strong></li>
+            <li class="list-group-item"><i class="fas fa-location-arrow"></i> Main Region: <strong class="text-capitalize">{{deck?.main_region.name}}</strong></li>
           </ul>
         </div>
       </div>
     </div>
 
     <div class="col-12 mt-5">
-      <h4>Pokemon Species ({{deck.pokemon_species.length}})</h4>
+      <h4>Pokemon Species ({{deck?.pokemon_species?.length}})</h4>
       <div class="row mt-4">
-        <div class="col-12 col-md-4 col-lg-3 mb-4" *ngFor="let specie of deck.pokemon_species">
+        <div class="col-12 col-md-4 col-lg-3 mb-4" *ngFor="let specie of deck?.pokemon_species">
           <div class="card pokemon" routerLink="/pokemon/{{specie.name}}">
             <div class="card-header">
               <div class="card-img">
