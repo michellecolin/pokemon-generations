@@ -1,5 +1,7 @@
 # PokemonGenerations
 
+**DEMO Page**: https://michellecolin.github.io/pokemon-generations/
+
 **Please run `npm install` before trying to run or build the project**
 
 ## Development server
