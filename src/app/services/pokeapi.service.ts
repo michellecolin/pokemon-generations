@@ -102,7 +102,7 @@ export class PokeService {
       const parts = specie.url.split('/');
       specie.id = parts[parts.length - 2];
     }
-    return `https://pokeres.bastionbot.org/images/pokemon/${specie.id}.png`;
+    return `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${specie.id}.png`;
   }
 
   /**

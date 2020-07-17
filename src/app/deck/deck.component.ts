@@ -12,7 +12,7 @@ export class DeckComponent implements OnInit {
   public loading;
   public deck;
   public innerWidth;
-  public perPage = 16;
+  public perPage = 8;
   public currentPage;
 
   constructor(
