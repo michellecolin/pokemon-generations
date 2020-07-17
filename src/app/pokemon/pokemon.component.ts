@@ -20,7 +20,7 @@ export class PokemonComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private router: Router,
     private toastr: ToastrService
-  ) { 
+  ) {
     this.innerWidth = window.innerWidth;
   }
 
