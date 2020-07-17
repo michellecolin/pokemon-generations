@@ -45,9 +45,8 @@ export class DeckComponent implements OnInit {
     return this.pokeApi.getDeckNumber(deck);
   }
 
-  getImageUrl(url) {
-    const parts = url.split('/');
-    return `https://pokeres.bastionbot.org/images/pokemon/${parts[parts.length - 2]}.png`;
+  getImageUrl(specie) {
+    return this.pokeApi.getImageUrl(specie);
   }
 
   @HostListener('window:resize', ['$event'])

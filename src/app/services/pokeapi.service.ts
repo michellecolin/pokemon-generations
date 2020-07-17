@@ -60,6 +60,14 @@ export class PokeService {
     return this.httpClient.get<any>(`${environment.endpoint}generation/${name}`);
   }
 
+  /**
+   * Get pokemon specie information
+   * @param name pokemon specie name
+   */
+  getPokemon(name) {
+    return this.httpClient.get<any>(`${environment.endpoint}pokemon-species/${name}`);
+  }
+
   getDeck(name) {
     console.log(name);
     if (this.decks) {
@@ -81,5 +89,24 @@ export class PokeService {
     return deck.names[Object.keys(deck.names).find(name => {
       return deck.names[name].language.name === 'en';
     })].name.split(' ')[1];
+  }
+
+  /**
+   * Get pokemon specie image form external url
+   */
+  getImageUrl(specie) {
+    if (!specie.id) {
+      const parts = specie.url.split('/');
+      specie.id = parts[parts.length - 2];
+    }
+    return `https://pokeres.bastionbot.org/images/pokemon/${specie.id}.png`;
+  }
+
+  /**
+   * Gets pokemon specie evolution chain
+   * @param url api url to get evolution chain
+   */
+  getEvolutionChain(url) {
+    return this.httpClient.get<any>(url);
   }
 }
