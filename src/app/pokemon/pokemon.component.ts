@@ -30,10 +30,10 @@ export class PokemonComponent implements OnInit {
         this.spinner.show();
         this.pokeApi.getPokemon(params.id).subscribe(response => {
           this.pokemon = response;
-          this.spinner.hide();
           this.evolutionChain = [];
 
           this.pokeApi.getEvolutionChain(this.pokemon.evolution_chain.url).subscribe(response => {
+            this.spinner.hide();
             this.treatChain(response.chain);
           });
         }, (httpError) => {
