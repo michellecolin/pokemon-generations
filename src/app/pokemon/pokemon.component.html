@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-12 mt-5">
-      <div class="card horizontal">
+      <div class="card" [ngClass]="{'horizontal': innerWidth > 500}">
         <div class="card-header">
           <div class="card-img">
             <img [src]="getImageUrl(pokemon)" onError="this.src='assets/images/unknown.png'"/>
@@ -9,6 +9,7 @@
         </div>
         <div class="card-body">
           <ul class="list-group list-group-flush">
+            <li class="list-group-item text-capitalize"><h4>{{pokemon.name}}</h4></li>
             <li class="list-group-item"><i class="fas fa-baby-carriage"></i> Growth Rate: <strong class="text-capitalize">{{pokemon.growth_rate.name}}</strong></li>
             <li class="list-group-item"><i class="fas fa-leaf"></i> Habitat: <strong class="text-capitalize">{{pokemon.habitat.name}}</strong></li>
             
@@ -39,7 +40,23 @@
         </div>
       </div>
     </div>
-  </div>
 
-  
+    <div class="col-12 mt-5">
+      <h4>Pokemon Evolution Chain</h4>
+      <div class="row mt-4">
+        <div class="col-12 col-md-4 col-lg-3 mb-4" *ngFor="let specie of evolutionChain">
+          <div class="card pokemon" routerLink="/pokemon/{{specie.name}}">
+            <div class="card-header">
+              <div class="card-img">
+                <img [src]="getImageUrl(specie)" onError="this.src='assets/images/unknown.png'"/>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title m-0"><span class="small-text">N° {{specie.id}}</span> - {{specie.name}}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
