@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PokeService } from '../services/pokeapi.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-deck-list',
@@ -12,14 +13,16 @@ export class DeckListComponent implements OnInit, OnDestroy {
 
   public subsDecksLoaded;
 
-  constructor(private pokeApi: PokeService) { }
+  constructor(
+    private pokeApi: PokeService,
+    private spinner: NgxSpinnerService
+  ) { }
 
   ngOnInit() {
-    this.loading = true;
-
+    this.spinner.show();
     this.subsDecksLoaded = this.pokeApi.decksLoaded.subscribe(response => {
       this.decks = response;
-      this.loading = false;
+      this.spinner.hide();
     });
 
     this.pokeApi.getDecksGenerations();

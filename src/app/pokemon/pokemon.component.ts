@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { PokeService } from '../services/pokeapi.service';
 import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-pokemon',
@@ -9,24 +10,24 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PokemonComponent implements OnInit {
   public pokemon;
-  public loading;
   public evolutionChain = [];
   public innerWidth;
 
   constructor(
     private pokeApi: PokeService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private spinner: NgxSpinnerService
   ) { 
     this.innerWidth = window.innerWidth;
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.loading = true;
       if (params.id) {
+        this.spinner.show();
         this.pokeApi.getPokemon(params.id).subscribe(response => {
           this.pokemon = response;
-          console.log(response);
+          this.spinner.hide();
           this.evolutionChain = [];
 
           this.pokeApi.getEvolutionChain(this.pokemon.evolution_chain.url).subscribe(response => {
