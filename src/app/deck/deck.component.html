@@ -38,7 +38,7 @@
     <div class="col-12 mt-5">
       <h4>Pokemon Species ({{deck?.pokemon_species?.length}})</h4>
       <div class="row mt-4">
-        <div class="col-12 col-md-4 col-lg-3 mb-4" *ngFor="let specie of deck?.pokemon_species">
+        <div class="col-12 col-md-4 col-lg-3 mb-4" *ngFor="let specie of deck?.pokemon_species | paginate: { itemsPerPage: perPage, currentPage: currentPage, totalItems: deck.pokemon_species.length }">
           <div class="card pokemon" routerLink="/pokemon/{{specie.name}}">
             <div class="card-header">
               <div class="card-img">
@@ -50,6 +50,17 @@
             </div>
           </div>
         </div>
+
+        <div class="col-12 text-center mb-4 mt-2">
+          <pagination-controls
+            (pageChange)="pageChanged($event)"
+            autoHide="true"
+            responsive="true"
+            previousLabel="Previous"
+            nextLabel="Next">
+          </pagination-controls>
+        </div>
+       
       </div>
     </div>
   </div>
