@@ -1,5 +1,8 @@
 # PokemonGenerations
 
+**Please run `npm install` before trying to run or build the project**
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.3.
 
 ## Development server
