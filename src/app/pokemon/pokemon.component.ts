@@ -1,7 +1,8 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { PokeService } from '../services/pokeapi.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-pokemon',
@@ -16,7 +17,9 @@ export class PokemonComponent implements OnInit {
   constructor(
     private pokeApi: PokeService,
     private route: ActivatedRoute,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private router: Router,
+    private toastr: ToastrService
   ) { 
     this.innerWidth = window.innerWidth;
   }
@@ -33,9 +36,12 @@ export class PokemonComponent implements OnInit {
           this.pokeApi.getEvolutionChain(this.pokemon.evolution_chain.url).subscribe(response => {
             this.treatChain(response.chain);
           });
+        }, (httpError) => {
+          this.toastr.error('An error occurred, you were redirected!');
+          this.router.navigateByUrl('/deck-list');
         });
       } else {
-        //TODO
+        this.router.navigateByUrl('/deck-list');
       }
     });
   }

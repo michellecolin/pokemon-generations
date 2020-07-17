@@ -8,7 +8,8 @@ const appRoutes: Routes = [
     { path: '', redirectTo: 'deck-list', pathMatch: 'full'},
     { path: 'deck-list', component: DeckListComponent},
     { path: 'deck/:id', component: DeckComponent},
-    { path: 'pokemon/:id', component: PokemonComponent }
+    { path: 'pokemon/:id', component: PokemonComponent },
+    { path: '**', redirectTo: '/deck-list'}
   ];
 
 @NgModule({

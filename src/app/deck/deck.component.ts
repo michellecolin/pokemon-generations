@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { PokeService } from '../services/pokeapi.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
@@ -16,7 +16,8 @@ export class DeckComponent implements OnInit {
   constructor(
     private pokeApi: PokeService,
     private route: ActivatedRoute,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private router: Router
   ) {
     this.innerWidth = window.innerWidth;
   }
@@ -35,7 +36,7 @@ export class DeckComponent implements OnInit {
 
         this.pokeApi.getDeck(params.id);
       } else {
-        //TODO
+        this.router.navigateByUrl('/deck-list');
       }
     });
   }

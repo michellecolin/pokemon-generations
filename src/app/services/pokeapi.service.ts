@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +16,9 @@ export class PokeService {
 
   constructor(
     private httpClient: HttpClient,
+    private router: Router,
+    private toastr: ToastrService
   ) {}
-
 
   /**
    * Returns the pokemon decks generations
@@ -32,7 +35,6 @@ export class PokeService {
         Promise.all(this.getDecksRequests(response.results)).then((responses) => {
           this.decks = responses;
           this.decksLoaded.next(this.decks);
-        }, (httpError) => {
         });
       });
     }
@@ -74,6 +76,9 @@ export class PokeService {
     } else {
      this.getDeckRequest(name).subscribe(response => {
       this.deckLoaded.next(response);
+     }, (httpError) => {
+      this.toastr.error('An error occurred, you were redirected!');
+      this.router.navigateByUrl('/deck-list');
      });
     }
   }
