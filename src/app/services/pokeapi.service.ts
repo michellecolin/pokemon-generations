@@ -102,6 +102,13 @@ export class PokeService {
       const parts = specie.url.split('/');
       specie.id = parts[parts.length - 2];
     }
+
+    if (specie.id.length === 2) {
+      specie.id = '0' + specie.id;
+    } else if (specie.id.length === 1) {
+      specie.id = '00' + specie.id;
+    }
+
     return `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${specie.id}.png`;
   }
 
