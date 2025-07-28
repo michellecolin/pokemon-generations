@@ -36,7 +36,7 @@ jobs:
       - name: Add changelog entry
         run: |
           ENTRY="${{ steps.vars.outputs.entry }}"
-          FILE="CHANGELOG.md"
+          FILE="changelog.md"
 
           awk -v entry="$ENTRY" '
             BEGIN { inserted = 0 }
@@ -53,7 +53,7 @@ jobs:
 
       - name: Commit changes
         run: |
-          git add CHANGELOG.md
+          git add changelog.md
           git commit -m "chore: add changelog for #${{ github.event.pull_request.number }}"
 
       - name: Push branch
