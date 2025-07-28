@@ -13,9 +13,9 @@ jobs:
 
       - name: Check for changelog entry
         run: |
-          if git log origin/master..HEAD --name-only --pretty="" | grep -q "^changelog.md$"; then
+          if git diff --name-only HEAD^ HEAD | grep -q "^changelog.md$"; then
             echo "Changelog entry found ✅"
           else
             echo "❌ No changelog.md entry found"
-            exit 1
+          exit 1
           fi
