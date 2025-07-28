@@ -1,0 +1,17 @@
+name: Require Changelog Entry
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+jobs:
+  check-changelog:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Check if changelog.md was modified
+        run: |
+          git fetch origin ${{ github.base_ref }}
+          git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -q "^changelog.md$" && echo "Changelog entry found ✅" || (echo "❌ No changelog.md entry found" && exit 1)
