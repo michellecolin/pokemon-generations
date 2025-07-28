@@ -6,6 +6,7 @@ All changes to the extensions must be initially added as a new `Unpublished` sec
 
 ## Unpublished
 
+
 ### Changed
 
 - Dependency update [#931](https://github.com/smile-io/smile-shopify-app-extensions/pull/931)
