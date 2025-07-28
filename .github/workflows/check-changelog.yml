@@ -21,6 +21,7 @@ jobs:
             echo "✅ Changelog entry found!"
           else
             echo "❌ No changelog.md entry found"
+            echo "::error title=Changelog Missing::changelog.md was NOT modified in this PR. Please update changelog.md to document your changes."
             exit 1
           fi
         env:
