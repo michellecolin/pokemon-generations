@@ -4,11 +4,11 @@ This document tracks notable modifications to the extensions contained within th
 
 All changes to the extensions must be initially added as a new `Unpublished` section at the top of this file, and using appropriate [sub-sections](https://keepachangelog.com/en/1.1.0/#how) to describe the changes. Before merging the PR, update the `Unpublished` heading with the corresponding version number and date.
 
-## Unpublished
+## v191 - 2025-07-27
 
 ### Changed
 
-- Dependency update [#931](https://github.com/smile-io/smile-shopify-app-extensions/pull/931)
+- Dependency update [#784](https://github.com/smile-io/smile-shopify-app-extensions/pull/784)
 
 ## v190 - 2025-07-23
 
