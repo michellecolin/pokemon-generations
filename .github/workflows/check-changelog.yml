@@ -32,13 +32,26 @@ jobs:
   changelog-missing-exemption:
     needs: check-changelog
     runs-on: ubuntu-latest
+    if: needs.check-changelog.outputs.updated == 'false'  # Only runs if the previous job failed
     environment:
       name: Request for changelog entry exemption
     steps:
-      - name: Check changelog status
+      - name: Await contributor approval for changelog exemption
         run: |
-          if [[ "${{ needs.check-changelog.outputs.updated }}" == "true" ]]; then
-            echo "✅ Changelog entry found!"
+          echo "Changelog entry missing - awaiting exemption approval by contributor."
+
+  final-status:
+    needs: [check-changelog, changelog-missing-exemption]
+    runs-on: ubuntu-latest
+    if: |
+      always()
+    steps:
+      - name: Evaluate final result
+        run: |
+          if [[ "${{ needs.check-changelog.outputs.updated }}" == "true" ]] || 
+             [[ "${{ needs.check-changelog.outputs.updated }}" == "false" && "${{ needs.changelog-missing-exemption.result }}" == "success" ]]; then
+            echo "✅ Workflow passed"
           else
-            echo "❌ Changelog entry missing - awaiting exemption approval by contributor."
+            echo "❌ Workflow failed"
+            exit 1
           fi
