@@ -31,10 +31,14 @@ jobs:
           
   changelog-missing-exemption:
     needs: check-changelog
-    if: needs.check-changelog.outputs.updated == 'false'  # Only runs if the previous job failed
     runs-on: ubuntu-latest
     environment:
       name: Request for changelog entry exemption
     steps:
-      - name: Await contributor approval for changelog exemption
-        run: echo "Changelog entry missing - awaiting exemption approval by contributor."
+      - name: Check changelog status
+        run: |
+          if [[ "${{ needs.check-changelog.outputs.updated }}" == "true" ]]; then
+            echo "✅ Changelog entry found!"
+          else
+            echo "❌ Changelog entry missing - awaiting exemption approval by contributor."
+          fi
