@@ -24,4 +24,13 @@ jobs:
             exit 1
           fi
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }
+  changelog_exemption:
+    needs: check-changelog
+    if: failure()  # Only runs if the previous job failed
+    runs-on: ubuntu-latest
+    environment:
+      name: changelog-exemption
+    steps:
+      - name: Await contributor approval for changelog exemption
+        run: echo "Changelog missing - awaiting exemption approval by contributor."
