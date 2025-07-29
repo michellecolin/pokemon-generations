@@ -1,6 +1,6 @@
 # Changelog for Smile's Shopify Extensions
 
-This document tracks notable modifications to the extensions contained within this repository, following the structure inspired by [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Each version is accompanied with a release date and [sub-sections](https://keepachangelog.com/en/1.1.0/#how) with PR links to describe the changes.
+This lalalla document tracks notable modifications to the extensions contained within this repository, following the structure inspired by [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Each version is accompanied with a release date and [sub-sections](https://keepachangelog.com/en/1.1.0/#how) with PR links to describe the changes.
 
 All changes to the extensions must be initially added as a new `Unpublished` section at the top of this file, and using appropriate [sub-sections](https://keepachangelog.com/en/1.1.0/#how) to describe the changes. Before merging the PR, update the `Unpublished` heading with the corresponding version number and date.
 
