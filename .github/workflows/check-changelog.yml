@@ -24,7 +24,7 @@ jobs:
             exit 1
           fi
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   changelog_exemption:
     needs: check-changelog
     if: failure()  # Only runs if the previous job failed
