@@ -7,7 +7,8 @@ on:
 jobs:
   check-changelog:
     runs-on: ubuntu-latest
-
+    outputs:
+      updated: ${{ steps.check.outputs.updated }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -18,19 +19,30 @@ jobs:
           # Fetch the list of changed files in the PR
           CHANGED_FILES=$(gh pr view ${{ github.event.pull_request.number }} --json files -q '.files[].path')
           if echo "$CHANGED_FILES" | grep -qx "changelog.md"; then
-            echo "✅ Changelog entry found!"
+             echo "updated=true" >> $GITHUB_OUTPUT            
           else
-            echo "❌ No changelog.md entry found"
-            exit 1
+            echo "updated=false" >> $GITHUB_OUTPUT
           fi
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }
-  changelog_exemption:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+  changelog-exemption:
     needs: check-changelog
-    if: failure()  # Only runs if the previous job failed
+    if: needs.check-changelog.outputs.updated == 'false'  # Only runs if the previous job failed
     runs-on: ubuntu-latest
     environment:
       name: changelog-exemption
     steps:
       - name: Await contributor approval for changelog exemption
         run: echo "Changelog missing - awaiting exemption approval by contributor."
+
+  final-status:
+    needs: [check-changelog, changelog-exemption]
+    runs-on: ubuntu-latest
+    if: |
+      needs.check-changelog.outputs.updated == 'true' ||
+      (needs.check-changelog.outputs.updated == 'false' && needs.changelog-exemption.result == 'success')
+    steps:
+      - name: Mark workflow as successful
+        run: echo "Changelog updated, or exemption granted"
+
