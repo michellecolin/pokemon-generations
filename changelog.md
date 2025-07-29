@@ -1,4 +1,4 @@
-# Changelog for Smile's Shopify Extensions
+# Changelog for Smile's Shopify Extensionsss
 
 This document tracks notable modifications to the extensions contained within this repository, following the structure inspired by [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Each version is accompanied with a release date and [sub-sections](https://keepachangelog.com/en/1.1.0/#how) with PR links to describe the changes.
 
