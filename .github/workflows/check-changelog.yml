@@ -38,13 +38,3 @@ jobs:
     steps:
       - name: Await contributor approval for changelog exemption
         run: echo "Changelog entry missing - awaiting exemption approval by contributor."
-        
-  final-status:
-    needs: [check-changelog, changelog-missing-exemption]
-    runs-on: ubuntu-latest
-    if: |
-      needs.check-changelog.outputs.updated == 'true' ||
-      (needs.check-changelog.outputs.updated == 'false' && needs.changelog-exemption.result == 'success')
-    steps:
-      - name: Mark workflow as successful
-        run: echo "Changelog updated, or exemption granted"
